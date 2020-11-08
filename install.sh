@@ -2,8 +2,6 @@
 
 echo "Starting installation script"
 
-passwd
-
 sudo apt-get update
 sudo apt-get upgrade
 
