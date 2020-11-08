@@ -38,10 +38,10 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-  <h3 align="center">Ping Troubleshooting Tools</h3>
+  <h3 align="center">Spotify Connect With Display For Raspberry Pi With Pirate Audio</h3>
 
   <p align="center">
-    Tools to diagnose ping issues. In particular, to diagnose ping of your router relative to an external server (e.g. 8.8.8.8)
+    Installs raspotify and displays coverart for the playing song on a Pirate Audio display.
     <br />
     <!-- <a href="https://github.com/jb10181/spotify_zero"><strong>Explore the docs »</strong></a>
     <br />
