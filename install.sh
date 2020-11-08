@@ -9,7 +9,7 @@ sudo apt-get install python3-pip
 sudo apt-get install python-rpi.gpio python-spidev python-pip python-pil python-numpy
 sudo pip install st7789
 
-pip install spotipy pillow
+pip install numpy pillow spotipy
 
 curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
 
