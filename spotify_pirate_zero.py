@@ -61,7 +61,7 @@ sp = spotipy.Spotify(auth=token)
 currentsong = sp.currently_playing()
 
 name_artist = currentsong["item"]["artists"][0]["name"]
-name_album = currentsong["item"]["album"][0]["name"]
+name_album = currentsong["item"]["album"]["name"]
 name_song = currentsong["item"]["name"]
 url_album_art = currentsong["item"]["album"]["images"][0]["url"]
 
