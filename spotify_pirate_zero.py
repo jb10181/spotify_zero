@@ -60,14 +60,16 @@ sp = spotipy.Spotify(auth=token)
 
 currentsong = sp.currently_playing()
 
-song_name = currentsong["item"]["name"]
-song_artist = currentsong["item"]["artists"][0]["name"]
-song_art_url = currentsong["item"]["album"]["images"][0]["url"]
+name_artist = currentsong["item"]["artists"][0]["name"]
+name_album = currentsong["item"]["album"]
+name_song = currentsong["item"]["name"]
+url_album_art = currentsong["item"]["album"]["images"][0]["url"]
 
-print("Now playing {} by {}".format(song_name, song_artist))
-print(song_art_url)
+print("Now playing {} by {}".format(name_song, name_artist))
+print(name_album)
+print(url_album_art)
 ##############################################################################
-response = requests.get(song_art_url)
+response = requests.get(url_album_art)
 song_art = Image.open(BytesIO(response.content))
 
 # print(img)
@@ -121,9 +123,9 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
 
 
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
-draw_rotated_text(img, song_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
-draw_rotated_text(img, song_artist, (0, 50), 0, font=font_album, fill=(255, 255, 255))
-draw_rotated_text(img, song_name, (0, 100), 0, font=font_song, fill=(255, 255, 255))
+draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
+draw_rotated_text(img, name_artist, (0, 60), 0, font=font_album, fill=(255, 255, 255))
+draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
 
 # Write buffer to display hardware, must be called to make things visible on the
 # display!
