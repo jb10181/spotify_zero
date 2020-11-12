@@ -141,9 +141,9 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
 
 
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
-draw_rotated_text(img, song_artist, (0, 0), 0, font_artist_size, fill=(255, 255, 255))
-draw_rotated_text(img, song_artist, (0, 10), 0, font_album_size, fill=(255, 255, 255))
-draw_rotated_text(img, song_name, (0, 20), 0, font_title_size, fill=(255, 255, 255))
+draw_rotated_text(img, song_artist, (0, 0), 0, font=font_artist_size, fill=(255, 255, 255))
+draw_rotated_text(img, song_artist, (0, 10), 0, font=font_album_size, fill=(255, 255, 255))
+draw_rotated_text(img, song_name, (0, 20), 0, font=font_title_size, fill=(255, 255, 255))
 
 # Write buffer to display hardware, must be called to make things visible on the
 # display!
