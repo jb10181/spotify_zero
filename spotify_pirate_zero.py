@@ -11,9 +11,9 @@ import ST7789
 
 credentials_file = ".credentials"
 
+font_artist_size = 30
+font_album_size = 20
 font_song_size = 45
-font_album_size = 30
-font_artist_size = 20
 
 font_path = "VioletSans-Regular.ttf"
 
@@ -96,31 +96,11 @@ img = song_art.resize((HEIGHT, WIDTH))
 
 draw = ImageDraw.Draw(img)
 
-# Draw a purple rectangle with yellow outline.
-# draw.rectangle((10, 10, WIDTH - 10, HEIGHT - 10), outline=(255, 255, 0), fill=(255, 0, 255))
-
-# Draw some shapes.
-# Draw a blue ellipse with a green outline.
-# draw.ellipse((10, 10, WIDTH - 10, HEIGHT - 10), outline=(0, 255, 0), fill=(0, 0, 255))
-
-# Draw a white X.
-# draw.line((10, 10, WIDTH - 10, HEIGHT - 10), fill=(255, 255, 255))
-# draw.line((10, HEIGHT - 10, WIDTH - 10, 10), fill=(255, 255, 255))
-
-# Draw a cyan triangle with a black outline.
-# draw.polygon([(WIDTH / 2, 10), (WIDTH - 10, HEIGHT - 10), (10, HEIGHT - 10)], outline=(0, 0, 0), fill=(0, 255, 255))
-
 # Load default font.
 # font = ImageFont.load_default()
 font_song = ImageFont.truetype(font_path, size=font_song_size)
 font_album = ImageFont.truetype(font_path, size=font_album_size)
 font_artist = ImageFont.truetype(font_path, size=font_artist_size)
-
-
-# Alternatively load a TTF font.
-# Some other nice fonts to try: http://www.dafont.com/bitmap.php
-# font = ImageFont.truetype('Minecraftia.ttf', 16)
-
 
 # Define a function to create rotated text.  Unfortunately PIL doesn't have good
 # native support for rotated fonts, but this function can be used to make a
@@ -142,8 +122,8 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
 
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
 draw_rotated_text(img, song_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
-draw_rotated_text(img, song_artist, (0, 10), 0, font=font_album, fill=(255, 255, 255))
-draw_rotated_text(img, song_name, (0, 20), 0, font=font_song, fill=(255, 255, 255))
+draw_rotated_text(img, song_artist, (0, 50), 0, font=font_album, fill=(255, 255, 255))
+draw_rotated_text(img, song_name, (0, 100), 0, font=font_song, fill=(255, 255, 255))
 
 # Write buffer to display hardware, must be called to make things visible on the
 # display!
