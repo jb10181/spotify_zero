@@ -89,7 +89,6 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
-
 img = song_art.resize((HEIGHT, WIDTH))
 # Clear the display to a red background.
 # Can pass any tuple of red, green, blue values (from 0 to 255 each).
@@ -119,7 +118,10 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     # Rotate the text image.
     rotated = textimage.rotate(angle, expand=1)
     # Paste the text into the image, using it as a mask for transparency.
+    print(image.size[0])
     image.paste(rotated, position, rotated)
+    print(image.size[0])
+
 
 
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
