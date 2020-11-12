@@ -11,7 +11,7 @@ import ST7789
 
 credentials_file = ".credentials"
 
-font_title_size = 45
+font_song_size = 45
 font_album_size = 30
 font_artist_size = 20
 
@@ -112,9 +112,9 @@ draw = ImageDraw.Draw(img)
 
 # Load default font.
 # font = ImageFont.load_default()
-font_song_name = ImageFont.truetype(font_path, size=font_title_size)
-font_album_name = ImageFont.truetype(font_path, size=font_album_size)
-font_artist_name = ImageFont.truetype(font_path, size=font_artist_size)
+font_song = ImageFont.truetype(font_path, size=font_song_size)
+font_album = ImageFont.truetype(font_path, size=font_album_size)
+font_artist = ImageFont.truetype(font_path, size=font_artist_size)
 
 
 # Alternatively load a TTF font.
@@ -141,9 +141,9 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
 
 
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
-draw_rotated_text(img, song_artist, (0, 0), 0, font=font_artist_size, fill=(255, 255, 255))
-draw_rotated_text(img, song_artist, (0, 10), 0, font=font_album_size, fill=(255, 255, 255))
-draw_rotated_text(img, song_name, (0, 20), 0, font=font_title_size, fill=(255, 255, 255))
+draw_rotated_text(img, song_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
+draw_rotated_text(img, song_artist, (0, 10), 0, font=font_album, fill=(255, 255, 255))
+draw_rotated_text(img, song_name, (0, 20), 0, font=font_song, fill=(255, 255, 255))
 
 # Write buffer to display hardware, must be called to make things visible on the
 # display!
