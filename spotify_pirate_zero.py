@@ -2,6 +2,7 @@ import spotipy
 import spotipy.util as util
 import os.path
 # import sys
+import numpy as np
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
@@ -119,7 +120,7 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     rotated = textimage.rotate(angle, expand=1)
     # Paste the text into the image, using it as a mask for transparency.
     # print(image.size[0])
-    static_offset = [0, int((240 - width) / 2)]
+    static_offset = np.array(0, int((240 - width) / 2))
     image.paste(rotated, position + static_offset, rotated)
     print(width)
     print(height)
