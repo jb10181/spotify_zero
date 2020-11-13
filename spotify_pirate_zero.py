@@ -123,15 +123,15 @@ im_artist = draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fil
 im_album = draw_rotated_text(img, name_album, (0, 60), 0, font=font_album, fill=(255, 255, 255))
 #im_song = draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
 
+draw = ImageDraw.Draw(img)
+width, height = draw.textsize(name_song, font=font_song)
+textimage = Image.new('RGBA', (width, height), (0, 0, 0, 0))
+textdraw = ImageDraw.Draw(textimage)
+textdraw.text((0, 0), name_song, font=font_song, fill=(255, 255, 255))
+
 t_start = time.time()
 
 while True:
-    draw = ImageDraw.Draw(img)
-    width, height = draw.textsize(name_song, font=font_song)
-    textimage = Image.new('RGBA', (width, height), (0, 0, 0, 0))
-    textdraw = ImageDraw.Draw(textimage)
-    textdraw.text((0, 0), name_song, font=font_song, fill=(255, 255, 255))
-
     x = (time.time() - t_start) * 100
     x %= (width + disp.width)
     draw.rectangle((0, 0, disp.width, 80), (0, 0, 0))
