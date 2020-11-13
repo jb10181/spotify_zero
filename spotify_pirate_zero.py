@@ -124,7 +124,6 @@ im_album = draw_rotated_text(img, name_album, (0, 60), 0, font=font_album, fill=
 im_song = draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
 
 t_start = time.time()
-text_x, text_y = draw.textsize(im_song, font=font_song)
 
 while True:
     x = (time.time() - t_start) * 100
