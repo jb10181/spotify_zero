@@ -124,8 +124,9 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     print(position)
     print(width)
     print(height)
-    static_offset = (0, int((240 - width) / 2))
-    image.paste(rotated, position + static_offset, rotated)
+    static_offset = (position[0], position[1] + int((240 - width) / 2))
+    print(static_offset)
+    image.paste(rotated, static_offset, rotated)
 
 
 
