@@ -135,9 +135,9 @@ def text_params(name, font):
 
 t_start = time.time()
 while True:
-    x_artist = (time.time() - t_start) * speed_scaling * len(name_artist) / 240
-    x_album = (time.time() - t_start) * speed_scaling * len(name_album) / 240
-    x_song = (time.time() - t_start) * speed_scaling * len(name_song) / 240
+    x_artist = (time.time() - t_start) * speed_scaling * font_artist_size * len(name_artist) / 240
+    x_album = (time.time() - t_start) * speed_scaling * font_album_size * len(name_album) / 240
+    x_song = (time.time() - t_start) * speed_scaling * font_song_size * len(name_song) / 240
 
     img = song_art.resize((HEIGHT, WIDTH))
     draw = ImageDraw.Draw(img)
