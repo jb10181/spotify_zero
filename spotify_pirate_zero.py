@@ -140,18 +140,25 @@ while True:
 
     # artist
     size_x, size_y, text_x, text_y = text_params(name_artist, font_artist)
-    x %= (size_x + disp.width)
-    draw.text((int(text_x - x), 0), name_artist, font=font_artist, fill=(255, 255, 255))
-
+    if size_x > 240:
+        x %= (size_x + disp.width)
+        draw.text((int(text_x - x), 0), name_artist, font=font_artist, fill=(255, 255, 255))
+    else:
+        draw.text((int((240 - size_x)/2), 0), name_artist, font=font_artist, fill=(255, 255, 255))
     # album
     size_x, size_y, text_x, text_y = text_params(name_album, font_album)
-    x %= (size_x + disp.width)
-    draw.text((int(text_x - x), 55), name_album, font=font_album, fill=(255, 255, 255))
-
+    if size_x > 240:
+        x %= (size_x + disp.width)
+        draw.text((int(text_x - x), 55), name_album, font=font_album, fill=(255, 255, 255))
+    else:
+        draw.text((int((240 - size_x)/2), 55), name_album, font=font_album, fill=(255, 255, 255))
     # song
     size_x, size_y, text_x, text_y = text_params(name_song, font_song)
-    x %= (size_x + disp.width)
-    draw.text((int(text_x - x), 100), name_song, font=font_song, fill=(255, 255, 255))
+    if size_x > 240:
+        x %= (size_x + disp.width)
+        draw.text((int(text_x - x), 100), name_song, font=font_song, fill=(255, 255, 255))
+    else:
+        draw.text((int((240 - size_x)/2), 100), name_song, font=font_song, fill=(255, 255, 255))
     print(size_x)
     print(size_y)
     print(text_x)
