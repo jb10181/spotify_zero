@@ -104,6 +104,7 @@ font_song = ImageFont.truetype(font_path, size=font_song_size)
 font_album = ImageFont.truetype(font_path, size=font_album_size)
 font_artist = ImageFont.truetype(font_path, size=font_artist_size)
 
+
 # Define a function to create rotated text.  Unfortunately PIL doesn't have good
 # native support for rotated fonts, but this function can be used to make a
 # text image and rotate it so it's easy to paste in the buffer.
@@ -120,6 +121,7 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     rotated = textimage.rotate(angle, expand=1)
     # Paste the text into the image, using it as a mask for transparency.
     # print(image.size[0])
+    print(position)
     print(width)
     print(height)
     static_offset = (0, int((240 - width) / 2))
