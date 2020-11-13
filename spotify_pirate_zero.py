@@ -11,7 +11,7 @@ import requests
 from io import BytesIO
 import ST7789
 
-speed_scaling = 50
+speed_scaling = 350
 
 credentials_file = ".credentials"
 
