@@ -60,7 +60,7 @@ sp = spotipy.Spotify(auth=token)
 
 currentsong = sp.currently_playing()
 
-name_artist = currentsong["item"]["artists"][0]["name"]
+name_artist = currentsong["item"]["artists"][0]["name"]  # put in exception here
 name_album = currentsong["item"]["album"]["name"]
 name_song = currentsong["item"]["name"]
 url_album_art = currentsong["item"]["album"]["images"][0]["url"]
@@ -120,13 +120,13 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     # Paste the text into the image, using it as a mask for transparency.
     # print(image.size[0])
     image.paste(rotated, position, rotated)
-    # print(image.size[0])
+    print(width)
+    print(height)
 
 
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
 # print(draw_rotated_text.size[0])
 draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
-print(draw_rotated_text.size[0])
 draw_rotated_text(img, name_artist, (0, 60), 0, font=font_album, fill=(255, 255, 255))
 draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
 
