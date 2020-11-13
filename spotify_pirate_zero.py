@@ -124,14 +124,16 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     print(position)
     print(width)
     print(height)
-    static_offset = (position[0] + int((240 - width) / 2), position[1])
+    if width < 240:
+        static_offset = (position[0] + int((240 - width) / 2), position[1])
+    else:
+        static_offset = position
     print(static_offset)
     image.paste(rotated, static_offset, rotated)
 
 
 
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
-# print(draw_rotated_text.size[0])
 draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
 draw_rotated_text(img, name_artist, (0, 60), 0, font=font_album, fill=(255, 255, 255))
 draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
