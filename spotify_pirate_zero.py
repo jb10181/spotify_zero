@@ -2,7 +2,8 @@ import spotipy
 import spotipy.util as util
 import os.path
 # import sys
-import numpy as np
+# import numpy as np
+import time
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
@@ -46,14 +47,6 @@ else:
         f.write(CLIENT_ID + "\n")
         f.write(CLIENT_SECRET + "\n")
 
-# print("##############################")
-# print(username)
-# print("##############################")
-# print(CLIENT_ID)
-# print("##############################")
-# print(CLIENT_SECRET)
-# print("##############################")
-
 token = util.prompt_for_user_token(username, scope, CLIENT_ID, CLIENT_SECRET,
                                    redirect_uri)
 
@@ -68,12 +61,11 @@ url_album_art = currentsong["item"]["album"]["images"][0]["url"]
 
 print("Now playing {} by {}".format(name_song, name_artist))
 print(name_album)
-print(url_album_art)
+# print(url_album_art)
 ##############################################################################
 response = requests.get(url_album_art)
 song_art = Image.open(BytesIO(response.content))
 
-# print(img)
 ###############################################################################
 disp = ST7789.ST7789(
     port=0,
@@ -91,15 +83,9 @@ WIDTH = disp.width
 HEIGHT = disp.height
 
 img = song_art.resize((HEIGHT, WIDTH))
-# Clear the display to a red background.
-# Can pass any tuple of red, green, blue values (from 0 to 255 each).
-# Get a PIL Draw object to start drawing on the display buffer.
-# img = Image.new('RGB', (WIDTH, HEIGHT), color=(255, 0, 0))
 
 draw = ImageDraw.Draw(img)
 
-# Load default font.
-# font = ImageFont.load_default()
 font_song = ImageFont.truetype(font_path, size=font_song_size)
 font_album = ImageFont.truetype(font_path, size=font_album_size)
 font_artist = ImageFont.truetype(font_path, size=font_artist_size)
@@ -132,12 +118,19 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     image.paste(rotated, static_offset, rotated)
 
 
-
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
-draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
-draw_rotated_text(img, name_artist, (0, 60), 0, font=font_album, fill=(255, 255, 255))
-draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
+im_artist = draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
+im_album = draw_rotated_text(img, name_album, (0, 60), 0, font=font_album, fill=(255, 255, 255))
+im_song = draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
+
+t_start = time.time()
+text_x, text_y = draw.textsize(im_song, font=font_song)
+
+while True:
+    x = (time.time() - t_start) * 100
+    im_song = im_song.transform(img.size, Image.AFFINE, (1, 0, 2, 0, 1, 0))
+    disp.display(img)
 
 # Write buffer to display hardware, must be called to make things visible on the
 # display!
-disp.display(img)
+# disp.display(img)
