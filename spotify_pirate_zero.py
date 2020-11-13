@@ -91,37 +91,37 @@ font_album = ImageFont.truetype(font_path, size=font_album_size)
 font_artist = ImageFont.truetype(font_path, size=font_artist_size)
 
 
-# Define a function to create rotated text.  Unfortunately PIL doesn't have good
-# native support for rotated fonts, but this function can be used to make a
-# text image and rotate it so it's easy to paste in the buffer.
-def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
-    # Get rendered font width and height.
-    draw = ImageDraw.Draw(image)
-    width, height = draw.textsize(text, font=font)
-    # Create a new image with transparent background to store the text.
-    textimage = Image.new('RGBA', (width, height), (0, 0, 0, 0))
-    # Render the text.
-    textdraw = ImageDraw.Draw(textimage)
-    textdraw.text((0, 0), text, font=font, fill=fill)
-    # Rotate the text image.
-    rotated = textimage.rotate(angle, expand=1)
-    # Paste the text into the image, using it as a mask for transparency.
-    # print(image.size[0])
-    print(position)
-    print(width)
-    print(height)
-    if width < 240:
-        static_offset = (position[0] + int((240 - width) / 2), position[1])
-    else:
-        static_offset = position
-    print(static_offset)
-    image.paste(rotated, static_offset, rotated)
-
-
-# Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
-# im_artist = draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
-# im_album = draw_rotated_text(img, name_album, (0, 60), 0, font=font_album, fill=(255, 255, 255))
-# im_song = draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
+# # Define a function to create rotated text.  Unfortunately PIL doesn't have good
+# # native support for rotated fonts, but this function can be used to make a
+# # text image and rotate it so it's easy to paste in the buffer.
+# def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
+#     # Get rendered font width and height.
+#     draw = ImageDraw.Draw(image)
+#     width, height = draw.textsize(text, font=font)
+#     # Create a new image with transparent background to store the text.
+#     textimage = Image.new('RGBA', (width, height), (0, 0, 0, 0))
+#     # Render the text.
+#     textdraw = ImageDraw.Draw(textimage)
+#     textdraw.text((0, 0), text, font=font, fill=fill)
+#     # Rotate the text image.
+#     rotated = textimage.rotate(angle, expand=1)
+#     # Paste the text into the image, using it as a mask for transparency.
+#     # print(image.size[0])
+#     print(position)
+#     print(width)
+#     print(height)
+#     if width < 240:
+#         static_offset = (position[0] + int((240 - width) / 2), position[1])
+#     else:
+#         static_offset = position
+#     print(static_offset)
+#     image.paste(rotated, static_offset, rotated)
+#
+#
+# # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
+# # im_artist = draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
+# # im_album = draw_rotated_text(img, name_album, (0, 60), 0, font=font_album, fill=(255, 255, 255))
+# # im_song = draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
 
 
 def text_params(name, font):
@@ -133,7 +133,7 @@ def text_params(name, font):
 
 t_start = time.time()
 while True:
-    x = (time.time() - t_start) * 20
+    x = (time.time() - t_start) * 1
 
     img = song_art.resize((HEIGHT, WIDTH))
     draw = ImageDraw.Draw(img)
@@ -142,6 +142,7 @@ while True:
     size_x, size_y, text_x, text_y = text_params(name_artist, font_artist)
     if size_x > 240:
         x %= (size_x + disp.width)
+        x = x * size_x
         draw.text((int(text_x - x), 10), name_artist, font=font_artist, fill=(255, 255, 255))
     else:
         draw.text((int((240 - size_x)/2), 10), name_artist, font=font_artist, fill=(255, 255, 255))
@@ -149,6 +150,7 @@ while True:
     size_x, size_y, text_x, text_y = text_params(name_album, font_album)
     if size_x > 240:
         x %= (size_x + disp.width)
+        x = x * size_x
         draw.text((int(text_x - x), 60), name_album, font=font_album, fill=(255, 255, 255))
     else:
         draw.text((int((240 - size_x)/2), 60), name_album, font=font_album, fill=(255, 255, 255))
@@ -156,6 +158,7 @@ while True:
     size_x, size_y, text_x, text_y = text_params(name_song, font_song)
     if size_x > 240:
         x %= (size_x + disp.width)
+        x = x * size_x
         draw.text((int(text_x - x), 100), name_song, font=font_song, fill=(255, 255, 255))
     else:
         draw.text((int((240 - size_x)/2), 100), name_song, font=font_song, fill=(255, 255, 255))
