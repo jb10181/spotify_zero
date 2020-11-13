@@ -129,12 +129,14 @@ while True:
     x = 240 - int((time.time() - t_start) * 10)
     if x <= -240:
         t_start = time.time()
-    im_song = draw_rotated_text(img, name_song, (x, 100), 0, font=font_song, fill=(255, 255, 255))
+        draw.text((int(0 - x), 100), name_song, font=font_song, fill=(255, 255, 255))
+
+    # im_song = draw_rotated_text(img, name_song, (x, 100), 0, font=font_song, fill=(255, 255, 255))
     # im_song = im_song.transform(img.size, Image.AFFINE, (1, 0, 2, 0, 1, 0))
     disp.display(img)
     time.sleep(0.5)
     del im_song
-    
+
 # Write buffer to display hardware, must be called to make things visible on the
 # display!
 # disp.display(img)
