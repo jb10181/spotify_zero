@@ -28,7 +28,7 @@ img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
 
 draw = ImageDraw.Draw(img)
 
-font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
+font = ImageFont.truetype("VioletSans-Regular.ttf", 30)
 
 size_x, size_y = draw.textsize(MESSAGE, font)
 
