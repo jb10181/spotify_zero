@@ -123,21 +123,29 @@ im_artist = draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fil
 im_album = draw_rotated_text(img, name_album, (0, 60), 0, font=font_album, fill=(255, 255, 255))
 #im_song = draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
 
+# draw = ImageDraw.Draw(img)
+# width, height = draw.textsize(name_song, font=font_song)
+# textimage = Image.new('RGBA', (width, height), (0, 0, 0, 0))
+# textdraw = ImageDraw.Draw(textimage)
+# textdraw.text((0, 0), name_song, font=font_song, fill=(255, 255, 255))
+
+img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
 draw = ImageDraw.Draw(img)
-width, height = draw.textsize(name_song, font=font_song)
-textimage = Image.new('RGBA', (width, height), (0, 0, 0, 0))
-textdraw = ImageDraw.Draw(textimage)
-textdraw.text((0, 0), name_song, font=font_song, fill=(255, 255, 255))
+# font = ImageFont.truetype("VioletSans-Regular.ttf", 30)
+size_x, size_y = draw.textsize(name_song, font_song)
+text_x = disp.width
+text_y = (80 - size_y) // 2
+
+t_start = time.time()
 
 t_start = time.time()
 
 while True:
     x = (time.time() - t_start) * 100
-    x %= (width + disp.width)
+    x %= (size_x + disp.width)
     draw.rectangle((0, 0, disp.width, 80), (0, 0, 0))
-    draw.text((int(WIDTH - x), HEIGHT), name_song, font=font_song, fill=(255, 255, 255))
+    draw.text((int(text_x - x), text_y), name_song, font=font_song, fill=(255, 255, 255))
     disp.display(img)
-
 
     # x = 240 - int((time.time() - t_start) * 10)
     # if x <= -240:
