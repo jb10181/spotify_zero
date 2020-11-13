@@ -121,7 +121,7 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
 im_artist = draw_rotated_text(img, name_artist, (0, 0), 0, font=font_artist, fill=(255, 255, 255))
 im_album = draw_rotated_text(img, name_album, (0, 60), 0, font=font_album, fill=(255, 255, 255))
-im_song = draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
+#im_song = draw_rotated_text(img, name_song, (0, 100), 0, font=font_song, fill=(255, 255, 255))
 
 t_start = time.time()
 
@@ -129,13 +129,12 @@ while True:
     x = 240 - int((time.time() - t_start) * 10)
     if x <= -240:
         t_start = time.time()
-        draw.text((int(0 - x), 100), name_song, font=font_song, fill=(255, 255, 255))
+    draw.rectangle((0, 120, disp.width, 80), (0, 0, 0))
+    draw.text((int(0 - x), 100), name_song, font=font_song, fill=(255, 255, 255))
 
     # im_song = draw_rotated_text(img, name_song, (x, 100), 0, font=font_song, fill=(255, 255, 255))
     # im_song = im_song.transform(img.size, Image.AFFINE, (1, 0, 2, 0, 1, 0))
     disp.display(img)
-    time.sleep(0.5)
-    del im_song
 
 # Write buffer to display hardware, must be called to make things visible on the
 # display!
