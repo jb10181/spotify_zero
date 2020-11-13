@@ -120,10 +120,11 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255, 255, 255)):
     rotated = textimage.rotate(angle, expand=1)
     # Paste the text into the image, using it as a mask for transparency.
     # print(image.size[0])
-    static_offset = np.array(0, int((240 - width) / 2))
-    image.paste(rotated, position + static_offset, rotated)
     print(width)
     print(height)
+    static_offset = (0, int((240 - width) / 2)
+    image.paste(rotated, position + static_offset, rotated)
+
 
 
 # Write two lines of white text on the buffer, rotated 90 degrees counter clockwise.
