@@ -109,7 +109,7 @@ font_artist = ImageFont.truetype(font_path, size=font_artist_size)
 
 
 def text_params(name, font):
-    size_x, size_y = draw.textsize(name, font)
+    size_x, size_y = d.textsize(name, font)
     text_x = disp.width
     text_y = (80 - size_y) // 2
     return size_x, size_y, text_x, text_y
@@ -123,7 +123,7 @@ while True:
     x_song = (current_time - t_start) * speed_scaling * font_song_size * len(name_song) / 240
 
     # img = song_art.resize((HEIGHT, WIDTH))
-    draw = ImageDraw.Draw(album_image)
+    # draw = ImageDraw.Draw(album_image)
     txt = Image.new("RGBA", base.size, (255, 255, 255, 0))
     d = ImageDraw.Draw(txt)
 
