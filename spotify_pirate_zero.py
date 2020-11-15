@@ -112,9 +112,14 @@ def text_params(name, font):
 
 
 t_start = time.time()
+
+current_time = 0
 while True:
+    previous_time = current_time
     current_time = time.time()
-    print(current_time - t_start)
+    print(current_time - previous_time)
+
+
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size * len(name_artist) / 240
     x_album = (current_time - t_start
