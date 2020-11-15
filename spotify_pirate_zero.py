@@ -104,7 +104,6 @@ WIDTH = disp.width
 HEIGHT = disp.height
 
 t_start = time.time()
-# current_time = t_start
 while True:
     try:
         name_artist, name_album, name_song, album_image = get_spotify_data(
