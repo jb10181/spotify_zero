@@ -109,11 +109,11 @@ while True:
     try:
         name_artist, name_album, name_song, album_image = get_spotify_data(
             token)
-    except IndexError:
+    except:
         name_artist = ""
         name_album = ""
         name_song = "Nothing playing"
-        album_image = Image.new("RGBA", (WIDTH, HEIGHT), (255, 255, 255, 0))
+        album_image = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 255))
 
     current_time = time.time()
     x_artist = (current_time - t_start
