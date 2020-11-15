@@ -12,6 +12,13 @@ from io import BytesIO
 import ST7789
 
 
+def text_params(name, font):
+    size_x, size_y = d.textsize(name, font)
+    text_x = disp.width
+    text_y = (80 - size_y) // 2
+    return size_x, size_y, text_x, text_y
+
+
 def spotify_authorisation():
     if os.path.isfile(credentials_file):
         # print("Using saved credentials")
@@ -46,11 +53,26 @@ def spotify_authorisation():
     return sp
 
 
-def text_params(name, font):
-    size_x, size_y = d.textsize(name, font)
-    text_x = disp.width
-    text_y = (80 - size_y) // 2
-    return size_x, size_y, text_x, text_y
+def get_spotify_data():
+    sp = spotify_authorisation()
+    currentsong = sp.currently_playing()
+
+    name_artist = currentsong["item"]["artists"][0]["name"]
+    name_album = currentsong["item"]["album"]["name"]
+    name_song = currentsong["item"]["name"]
+    url_album_art = currentsong["item"]["album"]["images"][0]["url"]
+
+    # downloads image from spotify album art url
+    response = requests.get(url_album_art)
+    song_art = Image.open(BytesIO(response.content))
+
+    # combines album art and decreases album art brightness
+    img = song_art.resize((HEIGHT, WIDTH)).convert("RGBA")
+    darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 128))
+    ImageDraw.Draw(darken)
+    album_image = Image.alpha_composite(img, darken)
+
+    return name_artist, name_album, name_song, album_image
 
 
 interval = 1.  # rate display is updated at
@@ -85,30 +107,13 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
-sp = spotify_authorisation()
-currentsong = sp.currently_playing()
-
-name_artist = currentsong["item"]["artists"][0]["name"]
-name_album = currentsong["item"]["album"]["name"]
-name_song = currentsong["item"]["name"]
-url_album_art = currentsong["item"]["album"]["images"][0]["url"]
-
-# downloads image from spotify album art url
-response = requests.get(url_album_art)
-song_art = Image.open(BytesIO(response.content))
-
-img = song_art.resize((HEIGHT, WIDTH)).convert("RGBA")
-
-darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 128))
-ImageDraw.Draw(darken)
-album_image = Image.alpha_composite(img, darken)
-
-
 
 t_start = time.time()
-
-current_time = t_start
+# current_time = t_start
 while True:
+    name_artist, name_album, name_song, album_image = get_spotify_data()
+
+    current_time = time.time()
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size * len(name_artist) / 240
     x_album = (current_time - t_start
