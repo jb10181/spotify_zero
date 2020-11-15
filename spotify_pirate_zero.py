@@ -37,14 +37,14 @@ def spotify_authorisation():
     else:
         # print("Generating new credentials")
         username = input(
-            "Please input usename (from the Spotify account overview):            "
-        )
+            "Please input usename (from the Spotify account overview):" +
+            "            ")
         CLIENT_ID = input(
-            "Please input client ID (from the Spotify developer dashboard):       "
-        )
+            "Please input client ID (from the Spotify developer dashboard):" +
+            "       ")
         CLIENT_SECRET = input(
-            "Please input client secret (from the Spotify developer dashboard)    "
-        )
+            "Please input client secret (from the Spotify developer dashboard)"
+            + "    ")
 
         with open(credentials_file, 'a', newline='\n') as f:
             f.write(username + "\n")
@@ -114,6 +114,7 @@ def text_params(name, font):
 t_start = time.time()
 while True:
     current_time = time.time()
+    print(current_time - t_start)
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size * len(name_artist) / 240
     x_album = (current_time - t_start
