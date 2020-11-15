@@ -103,11 +103,17 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
-
 t_start = time.time()
 # current_time = t_start
 while True:
-    name_artist, name_album, name_song, album_image = get_spotify_data(token)
+    try:
+        name_artist, name_album, name_song, album_image = get_spotify_data(
+            token)
+    except IndexError:
+        name_artist = ""
+        name_album = ""
+        name_song = "Nothing playing"
+        album_image = Image.new("RGBA", (WIDTH, HEIGHT), (255, 255, 255, 0))
 
     current_time = time.time()
     x_artist = (current_time - t_start
