@@ -21,15 +21,12 @@ def text_params(name, font):
 
 def spotify_authorisation():
     if os.path.isfile(credentials_file):
-        # print("Using saved credentials")
-
         with open(credentials_file, "r") as f:
             lines = f.readlines()
             username = lines[0][:-1]
             CLIENT_ID = lines[1][:-1]
             CLIENT_SECRET = lines[2][:-1]
     else:
-        # print("Generating new credentials")
         username = input(
             "Please input usename (from the Spotify account overview):" +
             "            ")
@@ -48,13 +45,11 @@ def spotify_authorisation():
     token = util.prompt_for_user_token(username, scope, CLIENT_ID,
                                        CLIENT_SECRET, redirect_uri)
 
+    return token
+
+
+def get_spotify_data(token):
     sp = spotipy.Spotify(auth=token)
-
-    return sp
-
-
-def get_spotify_data():
-    sp = spotify_authorisation()
     currentsong = sp.currently_playing()
 
     name_artist = currentsong["item"]["artists"][0]["name"]
@@ -91,6 +86,7 @@ font_artist = ImageFont.truetype(font_path, size=font_artist_size)
 credentials_file = ".credentials"
 scope = "user-read-currently-playing"
 redirect_uri = "http://localhost:8888/callback/"
+token = spotify_authorisation()
 
 # init display
 disp = ST7789.ST7789(
@@ -111,7 +107,7 @@ HEIGHT = disp.height
 t_start = time.time()
 # current_time = t_start
 while True:
-    name_artist, name_album, name_song, album_image = get_spotify_data()
+    name_artist, name_album, name_song, album_image = get_spotify_data(token)
 
     current_time = time.time()
     x_artist = (current_time - t_start
