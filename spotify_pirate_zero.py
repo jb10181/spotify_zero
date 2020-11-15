@@ -153,4 +153,4 @@ while True:
 
     out = Image.alpha_composite(base, txt)
 
-    disp.display(img)
+    disp.display(out)
