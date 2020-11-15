@@ -119,11 +119,11 @@ current_time = t_start
 while True:
     previous_time = current_time
     current_time = time.time()
-    elapsed_time = current_time - previous_time
-    print(elapsed_time)
+    # elapsed_time = current_time - previous_time
+    print(current_time - previous_time)
 
-    if interval - elapsed_time < 2 and interval - elapsed_time > 0:
-        time.sleep(interval - elapsed_time)
+    # if interval - elapsed_time < 2 and interval - elapsed_time > 0:
+    #     time.sleep(interval - elapsed_time)
 
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size * len(name_artist) / 240
@@ -180,3 +180,4 @@ while True:
     out = Image.alpha_composite(album_image, txt)
 
     disp.display(out)
+    time.sleep(1.0 - ((time.time() - t_start) % 1.0))
