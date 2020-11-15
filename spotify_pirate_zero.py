@@ -11,6 +11,8 @@ import requests
 from io import BytesIO
 import ST7789
 
+interval = 1
+
 speed_scaling = 8
 
 credentials_file = ".credentials"
@@ -117,8 +119,9 @@ current_time = 0
 while True:
     previous_time = current_time
     current_time = time.time()
-    print(current_time - previous_time)
-
+    elapsed_time = current_time - previous_time
+    print(elapsed_time)
+    time.sleep(interval - elapsed_time)
 
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size * len(name_artist) / 240
