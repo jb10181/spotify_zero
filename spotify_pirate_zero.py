@@ -121,7 +121,9 @@ while True:
     current_time = time.time()
     elapsed_time = current_time - previous_time
     print(elapsed_time)
-    time.sleep(interval - elapsed_time)
+
+    if interval - elapsed_time < 2 and interval - elapsed_time > 0:
+        time.sleep(interval - elapsed_time)
 
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size * len(name_artist) / 240
