@@ -62,7 +62,7 @@ def spotify_authorisation():
 sp = spotify_authorisation()
 currentsong = sp.currently_playing()
 
-print(sp)
+# print(sp)
 
 name_artist = currentsong["item"]["artists"][0]["name"]
 name_album = currentsong["item"]["album"]["name"]
