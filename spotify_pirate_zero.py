@@ -84,11 +84,11 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
-img = song_art.resize((HEIGHT, WIDTH))
+img = song_art.resize((HEIGHT, WIDTH)).convert("RGBA")
 
 draw = ImageDraw.Draw(img)
 
-img = Image.new('RGBA', (WIDTH, HEIGHT), fill=(0, 0, 0, 128))
+img = Image.new('RGBA', (WIDTH, HEIGHT), fill=(255, 255, 255, 128))
 draw = ImageDraw.Draw(img)
 
 disp.display(img)
@@ -107,9 +107,10 @@ disp.display(img)
 #
 # t_start = time.time()
 # while True:
-#     x_artist = (time.time() - t_start) * speed_scaling * font_artist_size * len(name_artist) / 240
-#     x_album = (time.time() - t_start) * speed_scaling * font_album_size * len(name_album) / 240
-#     x_song = (time.time() - t_start) * speed_scaling * font_song_size * len(name_song) / 240
+#     current_time = time.time()
+#     x_artist = (current_time - t_start) * speed_scaling * font_artist_size * len(name_artist) / 240
+#     x_album = (current_time - t_start) * speed_scaling * font_album_size * len(name_album) / 240
+#     x_song = (current_time - t_start) * speed_scaling * font_song_size * len(name_song) / 240
 #
 #     img = song_art.resize((HEIGHT, WIDTH))
 #     draw = ImageDraw.Draw(img)
