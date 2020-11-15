@@ -88,8 +88,7 @@ img = song_art.resize((HEIGHT, WIDTH))
 
 draw = ImageDraw.Draw(img)
 
-img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
-img.putalpha(128)
+img = Image.new('RGBA', (WIDTH, HEIGHT), color=(0, 0, 0, 128))
 draw = ImageDraw.Draw(img)
 
 font_song = ImageFont.truetype(font_path, size=font_song_size)
