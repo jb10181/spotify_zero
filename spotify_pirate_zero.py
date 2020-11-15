@@ -70,7 +70,7 @@ def get_spotify_data(token):
     return name_artist, name_album, name_song, album_image
 
 
-interval = 1.  # rate display is updated at
+interval = 0.1  # rate display is updated at
 speed_scaling = 8  # scales the speed that text scrolls at
 
 # sets the fonts
