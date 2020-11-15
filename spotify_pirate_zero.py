@@ -109,7 +109,7 @@ while True:
     try:
         name_artist, name_album, name_song, album_image = get_spotify_data(
             token)
-    except:
+    except TypeError:
         name_artist = ""
         name_album = ""
         name_song = "Nothing playing"
