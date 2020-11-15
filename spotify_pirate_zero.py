@@ -51,8 +51,8 @@ def get_spotify_currently_playing():
             f.write(CLIENT_ID + "\n")
             f.write(CLIENT_SECRET + "\n")
 
-    token = util.prompt_for_user_token(username, scope, CLIENT_ID, CLIENT_SECRET,
-                                       redirect_uri)
+    token = util.prompt_for_user_token(username, scope, CLIENT_ID,
+                                       CLIENT_SECRET, redirect_uri)
 
     sp = spotipy.Spotify(auth=token)
 
@@ -79,10 +79,9 @@ disp = ST7789.ST7789(
     port=0,
     cs=ST7789.BG_SPI_CS_FRONT,  # BG_SPI_CSB_BACK or BG_SPI_CS_FRONT
     dc=9,
-    backlight=19,               # 18 for back BG slot, 19 for front BG slot.
+    backlight=19,  # 18 for back BG slot, 19 for front BG slot.
     rotation=90,
-    spi_speed_hz=80 * 1000 * 1000
-)
+    spi_speed_hz=80 * 1000 * 1000)
 
 # Initialize display.
 disp.begin()
@@ -96,7 +95,6 @@ darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 128))
 d = ImageDraw.Draw(darken)
 
 album_image = Image.alpha_composite(img, darken)
-
 
 font_song = ImageFont.truetype(font_path, size=font_song_size)
 font_album = ImageFont.truetype(font_path, size=font_album_size)
@@ -113,9 +111,12 @@ def text_params(name, font):
 t_start = time.time()
 while True:
     current_time = time.time()
-    x_artist = (current_time - t_start) * speed_scaling * font_artist_size * len(name_artist) / 240
-    x_album = (current_time - t_start) * speed_scaling * font_album_size * len(name_album) / 240
-    x_song = (current_time - t_start) * speed_scaling * font_song_size * len(name_song) / 240
+    x_artist = (current_time - t_start
+                ) * speed_scaling * font_artist_size * len(name_artist) / 240
+    x_album = (current_time - t_start
+               ) * speed_scaling * font_album_size * len(name_album) / 240
+    x_song = (current_time -
+              t_start) * speed_scaling * font_song_size * len(name_song) / 240
 
     txt = Image.new("RGBA", (WIDTH, HEIGHT), (255, 255, 255, 0))
     d = ImageDraw.Draw(txt)
@@ -124,25 +125,43 @@ while True:
     size_x, size_y, text_x, text_y = text_params(name_artist, font_artist)
     if size_x > 240:  # if text is too long to fit on the display
         x_artist %= (size_x + disp.width) * size_x / 240
-        d.text((int(text_x - x_artist), 10), name_artist, font=font_artist, fill=(255, 255, 255, 255))
+        d.text((int(text_x - x_artist), 10),
+               name_artist,
+               font=font_artist,
+               fill=(255, 255, 255, 255))
     else:
-        d.text((int((240 - size_x)/2), 10), name_artist, font=font_artist, fill=(255, 255, 255, 255))
+        d.text((int((240 - size_x) / 2), 10),
+               name_artist,
+               font=font_artist,
+               fill=(255, 255, 255, 255))
 
     # album
     size_x, size_y, text_x, text_y = text_params(name_album, font_album)
     if size_x > 240:  # if text is too long to fit on the display
         x_album %= (size_x + disp.width)
-        d.text((int(text_x - x_album), 60), name_album, font=font_album, fill=(255, 255, 255, 255))
+        d.text((int(text_x - x_album), 60),
+               name_album,
+               font=font_album,
+               fill=(255, 255, 255, 255))
     else:
-        d.text((int((240 - size_x)/2), 60), name_album, font=font_album, fill=(255, 255, 255, 255))
+        d.text((int((240 - size_x) / 2), 60),
+               name_album,
+               font=font_album,
+               fill=(255, 255, 255, 255))
 
     # song
     size_x, size_y, text_x, text_y = text_params(name_song, font_song)
     if size_x > 240:  # if text is too long to fit on the display
         x_song %= (size_x + disp.width)
-        d.text((int(text_x - x_song), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
+        d.text((int(text_x - x_song), 100),
+               name_song,
+               font=font_song,
+               fill=(255, 255, 255, 255))
     else:
-        d.text((int((240 - size_x)/2), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
+        d.text((int((240 - size_x) / 2), 100),
+               name_song,
+               font=font_song,
+               fill=(255, 255, 255, 255))
 
     out = Image.alpha_composite(album_image, txt)
 
