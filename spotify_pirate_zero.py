@@ -88,7 +88,7 @@ img = song_art.resize((HEIGHT, WIDTH))
 
 draw = ImageDraw.Draw(img)
 
-img = Image.new('RGBA', (WIDTH, HEIGHT), color=(0, 0, 0, 128))
+img = Image.new('RGBA', (WIDTH, HEIGHT), fill=(0, 0, 0, 128))
 draw = ImageDraw.Draw(img)
 
 disp.display(img)
