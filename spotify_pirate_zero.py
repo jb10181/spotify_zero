@@ -91,49 +91,51 @@ draw = ImageDraw.Draw(img)
 img = Image.new('RGBA', (WIDTH, HEIGHT), color=(0, 0, 0, 128))
 draw = ImageDraw.Draw(img)
 
-font_song = ImageFont.truetype(font_path, size=font_song_size)
-font_album = ImageFont.truetype(font_path, size=font_album_size)
-font_artist = ImageFont.truetype(font_path, size=font_artist_size)
+disp.display(img)
 
-
-def text_params(name, font):
-    size_x, size_y = draw.textsize(name, font)
-    text_x = disp.width
-    text_y = (80 - size_y) // 2
-    return size_x, size_y, text_x, text_y
-
-
-t_start = time.time()
-while True:
-    x_artist = (time.time() - t_start) * speed_scaling * font_artist_size * len(name_artist) / 240
-    x_album = (time.time() - t_start) * speed_scaling * font_album_size * len(name_album) / 240
-    x_song = (time.time() - t_start) * speed_scaling * font_song_size * len(name_song) / 240
-
-    img = song_art.resize((HEIGHT, WIDTH))
-    draw = ImageDraw.Draw(img)
-
-    # artist
-    size_x, size_y, text_x, text_y = text_params(name_artist, font_artist)
-    if size_x > 240:
-        x_artist %= (size_x + disp.width) * size_x / 240
-        draw.text((int(text_x - x_artist), 10), name_artist, font=font_artist, fill=(255, 255, 255))
-    else:
-        draw.text((int((240 - size_x)/2), 10), name_artist, font=font_artist, fill=(255, 255, 255))
-
-    # album
-    size_x, size_y, text_x, text_y = text_params(name_album, font_album)
-    if size_x > 240:
-        x_album %= (size_x + disp.width)
-        draw.text((int(text_x - x_album), 60), name_album, font=font_album, fill=(255, 255, 255))
-    else:
-        draw.text((int((240 - size_x)/2), 60), name_album, font=font_album, fill=(255, 255, 255))
-
-    # song
-    size_x, size_y, text_x, text_y = text_params(name_song, font_song)
-    if size_x > 240:
-        x_song %= (size_x + disp.width)
-        draw.text((int(text_x - x_song), 100), name_song, font=font_song, fill=(255, 255, 255))
-    else:
-        draw.text((int((240 - size_x)/2), 100), name_song, font=font_song, fill=(255, 255, 255))
-
-    disp.display(img)
+# font_song = ImageFont.truetype(font_path, size=font_song_size)
+# font_album = ImageFont.truetype(font_path, size=font_album_size)
+# font_artist = ImageFont.truetype(font_path, size=font_artist_size)
+#
+#
+# def text_params(name, font):
+#     size_x, size_y = draw.textsize(name, font)
+#     text_x = disp.width
+#     text_y = (80 - size_y) // 2
+#     return size_x, size_y, text_x, text_y
+#
+#
+# t_start = time.time()
+# while True:
+#     x_artist = (time.time() - t_start) * speed_scaling * font_artist_size * len(name_artist) / 240
+#     x_album = (time.time() - t_start) * speed_scaling * font_album_size * len(name_album) / 240
+#     x_song = (time.time() - t_start) * speed_scaling * font_song_size * len(name_song) / 240
+#
+#     img = song_art.resize((HEIGHT, WIDTH))
+#     draw = ImageDraw.Draw(img)
+#
+#     # artist
+#     size_x, size_y, text_x, text_y = text_params(name_artist, font_artist)
+#     if size_x > 240:
+#         x_artist %= (size_x + disp.width) * size_x / 240
+#         draw.text((int(text_x - x_artist), 10), name_artist, font=font_artist, fill=(255, 255, 255))
+#     else:
+#         draw.text((int((240 - size_x)/2), 10), name_artist, font=font_artist, fill=(255, 255, 255))
+#
+#     # album
+#     size_x, size_y, text_x, text_y = text_params(name_album, font_album)
+#     if size_x > 240:
+#         x_album %= (size_x + disp.width)
+#         draw.text((int(text_x - x_album), 60), name_album, font=font_album, fill=(255, 255, 255))
+#     else:
+#         draw.text((int((240 - size_x)/2), 60), name_album, font=font_album, fill=(255, 255, 255))
+#
+#     # song
+#     size_x, size_y, text_x, text_y = text_params(name_song, font_song)
+#     if size_x > 240:
+#         x_song %= (size_x + disp.width)
+#         draw.text((int(text_x - x_song), 100), name_song, font=font_song, fill=(255, 255, 255))
+#     else:
+#         draw.text((int((240 - size_x)/2), 100), name_song, font=font_song, fill=(255, 255, 255))
+#
+#     disp.display(img)
