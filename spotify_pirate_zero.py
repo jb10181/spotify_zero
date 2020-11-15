@@ -25,9 +25,9 @@ scope = "user-read-currently-playing"
 redirect_uri = "http://localhost:8888/callback/"
 
 
-def get_spotify_currently_playing():
+def spotify_authorisation():
     if os.path.isfile(credentials_file):
-        print("Using saved credentials")
+        # print("Using saved credentials")
 
         with open(credentials_file, "r") as f:
             lines = f.readlines()
@@ -35,7 +35,7 @@ def get_spotify_currently_playing():
             CLIENT_ID = lines[1][:-1]
             CLIENT_SECRET = lines[2][:-1]
     else:
-        print("Generating new credentials")
+        # print("Generating new credentials")
         username = input(
             "Please input usename (from the Spotify account overview):            "
         )
@@ -56,10 +56,13 @@ def get_spotify_currently_playing():
 
     sp = spotipy.Spotify(auth=token)
 
-    return sp.currently_playing()
+    return sp
 
 
-currentsong = get_spotify_currently_playing()
+sp = spotify_authorisation()
+currentsong = sp.currently_playing()
+
+print(sp)
 
 name_artist = currentsong["item"]["artists"][0]["name"]
 name_album = currentsong["item"]["album"]["name"]
