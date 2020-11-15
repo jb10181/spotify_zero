@@ -115,7 +115,7 @@ def text_params(name, font):
 
 t_start = time.time()
 
-current_time = 0
+current_time = t_start
 while True:
     previous_time = current_time
     current_time = time.time()
