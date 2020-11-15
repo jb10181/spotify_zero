@@ -11,21 +11,6 @@ import requests
 from io import BytesIO
 import ST7789
 
-interval = 1
-
-speed_scaling = 8
-
-credentials_file = ".credentials"
-
-font_artist_size = 30
-font_album_size = 20
-font_song_size = 45
-
-font_path = "VioletSans-Regular.ttf"
-
-scope = "user-read-currently-playing"
-redirect_uri = "http://localhost:8888/callback/"
-
 
 def spotify_authorisation():
     if os.path.isfile(credentials_file):
@@ -61,25 +46,31 @@ def spotify_authorisation():
     return sp
 
 
-sp = spotify_authorisation()
-currentsong = sp.currently_playing()
+def text_params(name, font):
+    size_x, size_y = d.textsize(name, font)
+    text_x = disp.width
+    text_y = (80 - size_y) // 2
+    return size_x, size_y, text_x, text_y
 
-# print(sp)
 
-name_artist = currentsong["item"]["artists"][0]["name"]
-name_album = currentsong["item"]["album"]["name"]
-name_song = currentsong["item"]["name"]
-url_album_art = currentsong["item"]["album"]["images"][0]["url"]
+interval = 1.  # rate display is updated at
+speed_scaling = 8  # scales the speed that text scrolls at
 
-# print("Now playing {} by {}".format(name_song, name_artist))
-# print(name_album)
-# print(url_album_art)
+# sets the fonts
+font_artist_size = 30
+font_album_size = 20
+font_song_size = 45
+font_path = "VioletSans-Regular.ttf"
+font_song = ImageFont.truetype(font_path, size=font_song_size)
+font_album = ImageFont.truetype(font_path, size=font_album_size)
+font_artist = ImageFont.truetype(font_path, size=font_artist_size)
 
-# downloads image from spotify album art url
-response = requests.get(url_album_art)
-song_art = Image.open(BytesIO(response.content))
+# spotify authentication parameters
+credentials_file = ".credentials"
+scope = "user-read-currently-playing"
+redirect_uri = "http://localhost:8888/callback/"
 
-###############################################################################
+# init display
 disp = ST7789.ST7789(
     port=0,
     cs=ST7789.BG_SPI_CS_FRONT,  # BG_SPI_CSB_BACK or BG_SPI_CS_FRONT
@@ -94,37 +85,30 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
+sp = spotify_authorisation()
+currentsong = sp.currently_playing()
+
+name_artist = currentsong["item"]["artists"][0]["name"]
+name_album = currentsong["item"]["album"]["name"]
+name_song = currentsong["item"]["name"]
+url_album_art = currentsong["item"]["album"]["images"][0]["url"]
+
+# downloads image from spotify album art url
+response = requests.get(url_album_art)
+song_art = Image.open(BytesIO(response.content))
+
 img = song_art.resize((HEIGHT, WIDTH)).convert("RGBA")
 
 darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 128))
-d = ImageDraw.Draw(darken)
-
+ImageDraw.Draw(darken)
 album_image = Image.alpha_composite(img, darken)
 
-font_song = ImageFont.truetype(font_path, size=font_song_size)
-font_album = ImageFont.truetype(font_path, size=font_album_size)
-font_artist = ImageFont.truetype(font_path, size=font_artist_size)
-
-
-def text_params(name, font):
-    size_x, size_y = d.textsize(name, font)
-    text_x = disp.width
-    text_y = (80 - size_y) // 2
-    return size_x, size_y, text_x, text_y
 
 
 t_start = time.time()
 
 current_time = t_start
 while True:
-    previous_time = current_time
-    current_time = time.time()
-    # elapsed_time = current_time - previous_time
-    print(current_time - previous_time)
-
-    # if interval - elapsed_time < 2 and interval - elapsed_time > 0:
-    #     time.sleep(interval - elapsed_time)
-
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size * len(name_artist) / 240
     x_album = (current_time - t_start
@@ -180,4 +164,4 @@ while True:
     out = Image.alpha_composite(album_image, txt)
 
     disp.display(out)
-    time.sleep(1.0 - ((time.time() - t_start) % 1.0))
+    time.sleep(interval - ((time.time() - t_start) % interval))
