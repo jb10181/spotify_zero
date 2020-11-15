@@ -95,12 +95,13 @@ d = ImageDraw.Draw(txt)
 # draw text, half opacity
 d.text((10, 10), "Hello", font=fnt, fill=(255, 255, 255, 128))
 
+out = Image.alpha_composite(base, txt)
 # draw = ImageDraw.Draw(img)
 #
 # img = Image.new('RGBA', (WIDTH, HEIGHT), fill=(255, 255, 255, 128))
 # draw = ImageDraw.Draw(img)
 
-disp.display(img)
+disp.display(out)
 
 # font_song = ImageFont.truetype(font_path, size=font_song_size)
 # font_album = ImageFont.truetype(font_path, size=font_album_size)
