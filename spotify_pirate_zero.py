@@ -124,14 +124,16 @@ while True:
 
     # img = song_art.resize((HEIGHT, WIDTH))
     draw = ImageDraw.Draw(out)
+    txt = Image.new("RGBA", base.size, (255, 255, 255, 0))
+    d = ImageDraw.Draw(txt)
 
     # artist
     size_x, size_y, text_x, text_y = text_params(name_artist, font_artist)
     if size_x > 240:
         x_artist %= (size_x + disp.width) * size_x / 240
-        draw.text((int(text_x - x_artist), 10), name_artist, font=font_artist, fill=(255, 255, 255, 255))
+        d.text((int(text_x - x_artist), 10), name_artist, font=font_artist, fill=(255, 255, 255, 255))
     else:
-        draw.text((int((240 - size_x)/2), 10), name_artist, font=font_artist, fill=(255, 255, 255, 255))
+        d.text((int((240 - size_x)/2), 10), name_artist, font=font_artist, fill=(255, 255, 255, 255))
 
     # album
     size_x, size_y, text_x, text_y = text_params(name_album, font_album)
@@ -148,5 +150,7 @@ while True:
         draw.text((int(text_x - x_song), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
     else:
         draw.text((int((240 - size_x)/2), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
+
+    out = Image.alpha_composite(base, txt)
 
     disp.display(img)
