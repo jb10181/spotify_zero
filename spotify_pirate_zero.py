@@ -87,13 +87,13 @@ HEIGHT = disp.height
 img = song_art.resize((HEIGHT, WIDTH)).convert("RGBA")
 
 base = img
-txt = Image.new("RGBA", base.size, (255, 255, 255, 0))
-# get a font
-fnt = ImageFont.truetype("VioletSans-Regular.ttf", 40)
-# get a drawing context
+
+txt = Image.new('RGBA', (WIDTH, HEIGHT), (255, 255, 255, 128))
+
+# txt = Image.new("RGBA", base.size, (255, 255, 255, 0))
+# fnt = ImageFont.truetype("VioletSans-Regular.ttf", 40)
 d = ImageDraw.Draw(txt)
-# draw text, half opacity
-d.text((10, 10), "Hello", font=fnt, fill=(255, 255, 255, 128))
+# d.text((10, 10), "Hello", font=fnt, fill=(255, 255, 255, 128))
 
 out = Image.alpha_composite(base, txt)
 # draw = ImageDraw.Draw(img)
