@@ -11,7 +11,7 @@ import requests
 from io import BytesIO
 import ST7789
 
-speed_scaling = 5
+speed_scaling = 8
 
 credentials_file = ".credentials"
 
@@ -24,47 +24,53 @@ font_path = "VioletSans-Regular.ttf"
 scope = "user-read-currently-playing"
 redirect_uri = "http://localhost:8888/callback/"
 
-if os.path.isfile(credentials_file):
-    print("Using saved credentials")
 
-    with open(credentials_file, "r") as f:
-        lines = f.readlines()
-        username = lines[0][:-1]
-        CLIENT_ID = lines[1][:-1]
-        CLIENT_SECRET = lines[2][:-1]
-else:
-    print("Generating new credentials")
-    username = input(
-        "Please input usename (from the Spotify account overview):            "
-    )
-    CLIENT_ID = input(
-        "Please input client ID (from the Spotify developer dashboard):       "
-    )
-    CLIENT_SECRET = input(
-        "Please input client secret (from the Spotify developer dashboard)    "
-    )
+def get_spotify_currently_playing():
+    if os.path.isfile(credentials_file):
+        print("Using saved credentials")
 
-    with open(credentials_file, 'a', newline='\n') as f:
-        f.write(username + "\n")
-        f.write(CLIENT_ID + "\n")
-        f.write(CLIENT_SECRET + "\n")
+        with open(credentials_file, "r") as f:
+            lines = f.readlines()
+            username = lines[0][:-1]
+            CLIENT_ID = lines[1][:-1]
+            CLIENT_SECRET = lines[2][:-1]
+    else:
+        print("Generating new credentials")
+        username = input(
+            "Please input usename (from the Spotify account overview):            "
+        )
+        CLIENT_ID = input(
+            "Please input client ID (from the Spotify developer dashboard):       "
+        )
+        CLIENT_SECRET = input(
+            "Please input client secret (from the Spotify developer dashboard)    "
+        )
 
-token = util.prompt_for_user_token(username, scope, CLIENT_ID, CLIENT_SECRET,
-                                   redirect_uri)
+        with open(credentials_file, 'a', newline='\n') as f:
+            f.write(username + "\n")
+            f.write(CLIENT_ID + "\n")
+            f.write(CLIENT_SECRET + "\n")
 
-sp = spotipy.Spotify(auth=token)
+    token = util.prompt_for_user_token(username, scope, CLIENT_ID, CLIENT_SECRET,
+                                       redirect_uri)
 
-currentsong = sp.currently_playing()
+    sp = spotipy.Spotify(auth=token)
 
-name_artist = currentsong["item"]["artists"][0]["name"]  # put in exception here
+    return sp.currently_playing()
+
+
+currentsong = get_spotify_currently_playing()
+
+name_artist = currentsong["item"]["artists"][0]["name"]
 name_album = currentsong["item"]["album"]["name"]
 name_song = currentsong["item"]["name"]
 url_album_art = currentsong["item"]["album"]["images"][0]["url"]
 
-print("Now playing {} by {}".format(name_song, name_artist))
-print(name_album)
+# print("Now playing {} by {}".format(name_song, name_artist))
+# print(name_album)
 # print(url_album_art)
-##############################################################################
+
+# downloads image from spotify album art url
 response = requests.get(url_album_art)
 song_art = Image.open(BytesIO(response.content))
 
@@ -85,23 +91,12 @@ WIDTH = disp.width
 HEIGHT = disp.height
 
 img = song_art.resize((HEIGHT, WIDTH)).convert("RGBA")
-base = img
-
 
 darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 128))
-
-# txt = Image.new("RGBA", base.size, (255, 255, 255, 0))
-# fnt = ImageFont.truetype("VioletSans-Regular.ttf", 40)
 d = ImageDraw.Draw(darken)
-# d.text((10, 10), "Hello", font=fnt, fill=(255, 255, 255, 128))
 
-album_image = Image.alpha_composite(base, darken)
-# draw = ImageDraw.Draw(img)
-#
-# img = Image.new('RGBA', (WIDTH, HEIGHT), fill=(255, 255, 255, 128))
-# draw = ImageDraw.Draw(img)
+album_image = Image.alpha_composite(img, darken)
 
-# disp.display(out)
 
 font_song = ImageFont.truetype(font_path, size=font_song_size)
 font_album = ImageFont.truetype(font_path, size=font_album_size)
@@ -122,14 +117,12 @@ while True:
     x_album = (current_time - t_start) * speed_scaling * font_album_size * len(name_album) / 240
     x_song = (current_time - t_start) * speed_scaling * font_song_size * len(name_song) / 240
 
-    # img = song_art.resize((HEIGHT, WIDTH))
-    # draw = ImageDraw.Draw(album_image)
-    txt = Image.new("RGBA", base.size, (255, 255, 255, 0))
+    txt = Image.new("RGBA", (WIDTH, HEIGHT), (255, 255, 255, 0))
     d = ImageDraw.Draw(txt)
 
     # artist
     size_x, size_y, text_x, text_y = text_params(name_artist, font_artist)
-    if size_x > 240:
+    if size_x > 240:  # if text is too long to fit on the display
         x_artist %= (size_x + disp.width) * size_x / 240
         d.text((int(text_x - x_artist), 10), name_artist, font=font_artist, fill=(255, 255, 255, 255))
     else:
@@ -137,7 +130,7 @@ while True:
 
     # album
     size_x, size_y, text_x, text_y = text_params(name_album, font_album)
-    if size_x > 240:
+    if size_x > 240:  # if text is too long to fit on the display
         x_album %= (size_x + disp.width)
         d.text((int(text_x - x_album), 60), name_album, font=font_album, fill=(255, 255, 255, 255))
     else:
@@ -145,7 +138,7 @@ while True:
 
     # song
     size_x, size_y, text_x, text_y = text_params(name_song, font_song)
-    if size_x > 240:
+    if size_x > 240:  # if text is too long to fit on the display
         x_song %= (size_x + disp.width)
         d.text((int(text_x - x_song), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
     else:
