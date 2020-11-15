@@ -95,7 +95,7 @@ darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 128))
 d = ImageDraw.Draw(darken)
 # d.text((10, 10), "Hello", font=fnt, fill=(255, 255, 255, 128))
 
-out = Image.alpha_composite(base, darken)
+album_image = Image.alpha_composite(base, darken)
 # draw = ImageDraw.Draw(img)
 #
 # img = Image.new('RGBA', (WIDTH, HEIGHT), fill=(255, 255, 255, 128))
@@ -123,7 +123,7 @@ while True:
     x_song = (current_time - t_start) * speed_scaling * font_song_size * len(name_song) / 240
 
     # img = song_art.resize((HEIGHT, WIDTH))
-    draw = ImageDraw.Draw(out)
+    draw = ImageDraw.Draw(album_image)
     txt = Image.new("RGBA", base.size, (255, 255, 255, 0))
     d = ImageDraw.Draw(txt)
 
@@ -139,18 +139,18 @@ while True:
     size_x, size_y, text_x, text_y = text_params(name_album, font_album)
     if size_x > 240:
         x_album %= (size_x + disp.width)
-        draw.text((int(text_x - x_album), 60), name_album, font=font_album, fill=(255, 255, 255, 255))
+        d.text((int(text_x - x_album), 60), name_album, font=font_album, fill=(255, 255, 255, 255))
     else:
-        draw.text((int((240 - size_x)/2), 60), name_album, font=font_album, fill=(255, 255, 255, 255))
+        d.text((int((240 - size_x)/2), 60), name_album, font=font_album, fill=(255, 255, 255, 255))
 
     # song
     size_x, size_y, text_x, text_y = text_params(name_song, font_song)
     if size_x > 240:
         x_song %= (size_x + disp.width)
-        draw.text((int(text_x - x_song), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
+        d.text((int(text_x - x_song), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
     else:
-        draw.text((int((240 - size_x)/2), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
+        d.text((int((240 - size_x)/2), 100), name_song, font=font_song, fill=(255, 255, 255, 255))
 
-    out = Image.alpha_composite(base, txt)
+    out = Image.alpha_composite(album_image, txt)
 
     disp.display(out)
