@@ -61,7 +61,7 @@ def get_spotify_data(token):
 
     # combines album art and decreases album art brightness
     img = song_art.resize((HEIGHT, WIDTH)).convert("RGBA")
-    darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 128))
+    darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 155))
     ImageDraw.Draw(darken)
     album_image = Image.alpha_composite(img, darken)
 
@@ -112,22 +112,12 @@ while True:
         album_image = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 255))
 
     current_time = time.time()
-    # x_artist = (current_time - t_start) * speed_scaling * 1
-    # x_album = (current_time - t_start) * speed_scaling * 10
-    # x_song = (current_time - t_start) * speed_scaling * 100
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size / 15
     x_album = (current_time - t_start
                ) * speed_scaling * font_album_size / 15
     x_song = (current_time -
               t_start) * speed_scaling * font_song_size / 15
-
-    # x_artist = (current_time - t_start
-    #             ) * speed_scaling * font_artist_size * len(name_artist) / 240
-    # x_album = (current_time - t_start
-    #            ) * speed_scaling * font_album_size * len(name_album) / 240
-    # x_song = (current_time -
-    #           t_start) * speed_scaling * font_song_size * len(name_song) / 240
 
     txt = Image.new("RGBA", (WIDTH, HEIGHT), (255, 255, 255, 0))
     d = ImageDraw.Draw(txt)
