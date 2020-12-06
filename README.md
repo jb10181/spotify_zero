@@ -41,7 +41,7 @@
   <h3 align="center">Spotify Connect With Display For Raspberry Pi With Pirate Audio</h3>
 
   <p align="center">
-    Installs raspotify and displays coverart for the playing song on a Pirate Audio display.
+    Installs raspotify and displays cover art and song information for the currently playing song on a Pirate Audio display.
     <br />
     <!-- <a href="https://github.com/jb10181/spotify_zero"><strong>Explore the docs »</strong></a>
     <br />
@@ -72,9 +72,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Ping Troubleshooting Tools Screen Shot][product-screenshot]](https://github.com/jb10181/spotify_zero/blob/master/images/viewer.png)
+[![Ping Troubleshooting Tools Screen Shot][product-screenshot]](https://github.com/jb10181/spotify_zero/blob/master/images/image1.jpg)
 
-[![Ping Troubleshooting Tools Screen Shot 2][product-screenshot2]](https://github.com/jb10181/spotify_zero/blob/master/images/generator.png)
+[![Ping Troubleshooting Tools Screen Shot 2][product-screenshot2]](https://github.com/jb10181/spotify_zero/blob/master/images/image2.jpg)
 
 <!-- [LinkedIn](https://github.com/jb10181/spotify_zero/blob/master/images/generator.png)
 https://github.com/jb10181/spotify_zero/blob/master/images/viewer.png -->
@@ -254,5 +254,5 @@ Project Link: [https://github.com/jb10181/spotify_zero](https://github.com/jb101
 [license-url]: https://github.com/jb10181/spotify_zero/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/burchj/
-[product-screenshot]: https://github.com/jb10181/spotify_zero/blob/master/images/viewer.png
-[product-screenshot2]: https://github.com/jb10181/spotify_zero/blob/master/images/generator.png
+[product-screenshot]: https://github.com/jb10181/spotify_zero/blob/master/images/image1.jpg
+[product-screenshot2]: https://github.com/jb10181/spotify_zero/blob/master/images/image2.jpg
