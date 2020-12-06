@@ -69,7 +69,7 @@ def get_spotify_data(token):
 
 
 interval = 0.1  # rate display is updated at
-speed_scaling = 4  # scales the speed that text scrolls at
+speed_scaling = 8  # scales the speed that text scrolls at
 
 # sets the fonts
 font_artist_size = 30
@@ -116,11 +116,18 @@ while True:
     # x_album = (current_time - t_start) * speed_scaling * 10
     # x_song = (current_time - t_start) * speed_scaling * 100
     x_artist = (current_time - t_start
-                ) * speed_scaling * font_artist_size * len(name_artist) / 240
+                ) * speed_scaling * font_artist_size / 100
     x_album = (current_time - t_start
-               ) * speed_scaling * font_album_size * len(name_album) / 240
+               ) * speed_scaling * font_album_size / 100
     x_song = (current_time -
-              t_start) * speed_scaling * font_song_size * len(name_song) / 240
+              t_start) * speed_scaling * font_song_size / 100
+
+    # x_artist = (current_time - t_start
+    #             ) * speed_scaling * font_artist_size * len(name_artist) / 240
+    # x_album = (current_time - t_start
+    #            ) * speed_scaling * font_album_size * len(name_album) / 240
+    # x_song = (current_time -
+    #           t_start) * speed_scaling * font_song_size * len(name_song) / 240
 
     txt = Image.new("RGBA", (WIDTH, HEIGHT), (255, 255, 255, 0))
     d = ImageDraw.Draw(txt)
