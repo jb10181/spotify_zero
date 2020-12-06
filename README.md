@@ -213,7 +213,7 @@ Project Link: [https://github.com/jb10181/spotify_zero](https://github.com/jb101
 [stars-url]: https://github.com/jb10181/spotify_zero/stargazers
 [issues-shield]: https://img.shields.io/github/issues/jb10181/spotify_zero.svg?style=flat-square
 [issues-url]: https://github.com/jb10181/spotify_zero/issues
-[license-shield]: https://img.shields.io/github/license/jb10181/spotify_zero.svg?style=flat-square
+[license-shield]: https://img.shields.io/github/license/jb10181/ping_troubleshooting.svg?style=flat-square
 [license-url]: https://github.com/jb10181/spotify_zero/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/burchj/
