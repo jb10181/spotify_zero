@@ -156,7 +156,7 @@ sudo apt install libopenjp2-7 libopenjp2-7-dev libopenjp2-tools libatlas-base-de
 pip install st7789 numpy Pillow spotipy os time requests io
 ```
 
-6. Set the following parameters at the bottom of the /boot/config.txt file
+7. Set the following parameters at the bottom of the /boot/config.txt file
 ```sh
 sudo vi /boot/config.txt
 ```
@@ -165,18 +165,18 @@ dtparam=audio=off
 dtoverlay=hifiberry-dac
 gpio=25=op,dh"
 
-6. Install raspotify
+8. Install raspotify
 ```sh
 curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
 ```
 
-6. Download this project and enter the project directory
+9. Download this project and enter the project directory
 ```sh
 git clone https://github.com/jb10181/spotify_zero
 cd spotify_zero
 ```
 
-6. Set up the systemd service to run automatically
+10. Set up the systemd service to run automatically
 ```sh
 sudo cp spotify_pirate.service /lib/systemd/system/spotify_pirate.service
 sudo systemctl daemon-reload
