@@ -214,7 +214,7 @@ Project Link: [https://github.com/jb10181/spotify_zero](https://github.com/jb101
 [issues-shield]: https://img.shields.io/github/issues/jb10181/spotify_zero.svg?style=flat-square
 [issues-url]: https://github.com/jb10181/spotify_zero/issues
 [license-shield]: https://img.shields.io/github/license/jb10181/spotify_zero.svg?style=flat-square
-[license-url]: https://github.com/jb10181/spotify_zero/LICENSE.txt
+[license-url]: https://github.com/jb10181/spotify_zero/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/burchj/
 [product-screenshot]: https://github.com/jb10181/spotify_zero/blob/master/images/viewer.png
