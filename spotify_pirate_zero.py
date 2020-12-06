@@ -1,8 +1,6 @@
 import spotipy
 import spotipy.util as util
 import os.path
-# import sys
-# import numpy as np
 import time
 from PIL import Image
 from PIL import ImageDraw
@@ -114,12 +112,15 @@ while True:
         album_image = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 255))
 
     current_time = time.time()
-    x_artist = (current_time - t_start
-                ) * speed_scaling * font_artist_size * len(name_artist) / 240
-    x_album = (current_time - t_start
-               ) * speed_scaling * font_album_size * len(name_album) / 240
-    x_song = (current_time -
-              t_start) * speed_scaling * font_song_size * len(name_song) / 240
+    x_artist = (current_time - t_start) * speed_scaling * 1
+    x_album = (current_time - t_start) * speed_scaling * 10
+    x_song = (current_time - t_start) * speed_scaling * 100
+    # x_artist = (current_time - t_start
+    #             ) * speed_scaling * font_artist_size * len(name_artist) / 240
+    # x_album = (current_time - t_start
+    #            ) * speed_scaling * font_album_size * len(name_album) / 240
+    # x_song = (current_time -
+    #           t_start) * speed_scaling * font_song_size * len(name_song) / 240
 
     txt = Image.new("RGBA", (WIDTH, HEIGHT), (255, 255, 255, 0))
     d = ImageDraw.Draw(txt)
