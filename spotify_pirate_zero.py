@@ -116,11 +116,11 @@ while True:
     # x_album = (current_time - t_start) * speed_scaling * 10
     # x_song = (current_time - t_start) * speed_scaling * 100
     x_artist = (current_time - t_start
-                ) * speed_scaling * font_artist_size / 100
+                ) * speed_scaling * font_artist_size / 25
     x_album = (current_time - t_start
-               ) * speed_scaling * font_album_size / 100
+               ) * speed_scaling * font_album_size / 25
     x_song = (current_time -
-              t_start) * speed_scaling * font_song_size / 100
+              t_start) * speed_scaling * font_song_size / 25
 
     # x_artist = (current_time - t_start
     #             ) * speed_scaling * font_artist_size * len(name_artist) / 240
