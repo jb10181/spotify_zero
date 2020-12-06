@@ -2,6 +2,8 @@
 
 echo "Starting installation script"
 
+passwd
+
 sudo apt-get update
 sudo apt-get upgrade
 
@@ -11,6 +13,17 @@ sudo pip install st7789
 
 pip install numpy Pillow spotipy
 
+sudo vi /boot/config.txt
+
+# dtparam=audio=off
+#
+# dtoverlay=hifiberry-dac
+# gpio=25=op,dh
+
 curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
 
-sudo raspi-config
+git clone https://github.com/jb10181/spotify_zero
+cd spotify_zero
+sudo cp spotify_pirate.service /lib/systemd/system/spotify_pirate.service
+sudo systemctl daemon-reload
+sudo systemctl enable spotify_pirate.service
