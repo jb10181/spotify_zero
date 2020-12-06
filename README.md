@@ -81,7 +81,9 @@ https://github.com/jb10181/spotify_zero/blob/master/images/viewer.png -->
 
 <!-- [![Ping Troubleshooting Tools Screen Shot 2][product-screenshot]](https://github.com/jb10181/spotify_zero/blob/master/images/generator.png) -->
 
-I wrote some tools to ping two user-selected hosts (ideally their router plus an external host) and generate a .csv containing the ping information. There is also a tool to view the ping information vs time and identify dropped packets.
+I wrote some code to display album cover art and song information for the currently playing song on a Pirate Audio display. This code is to be used in conjunction with raspotify (a project I have no affiliation with).
+The key advantage of this over mopidy is that my solution is lightweight, which results in better performance, especially, on a raspberry pi zero.
+Text that is too long to fit on the display scrolls, as can be seen in the two still images above.
 
 <!-- Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
