@@ -176,12 +176,12 @@ git clone https://github.com/jb10181/spotify_zero
 cd spotify_zero
 ```
 
-10. Set up the systemd service to run automatically
+10. Set up the systemd service to run automatically and reboot
 ```sh
 sudo cp spotify_pirate.service /lib/systemd/system/spotify_pirate.service
 sudo systemctl daemon-reload
 sudo systemctl enable spotify_pirate.service
-cd spotify_zero
+sudo reboot now
 ```
 
 <!-- USAGE EXAMPLES -->
