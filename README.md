@@ -106,46 +106,83 @@ To get a local copy up and running follow these simple steps. -->
 The Python packages required to run
 <!-- * Python packages -->
 ```sh
-csv
-```
-```sh
-matplotlib
-```
-```sh
-ping3
-```
-```sh
-time
+spotipy
 ```
 ```sh
 os
 ```
 ```sh
-datetime
+time
 ```
 ```sh
-sys
+Pillow
 ```
 ```sh
-socket
+requests
 ```
 ```sh
-tkinter
+io
+```
+```sh
+ST7789
 ```
 
 
 ### Installation
 
-1. Clone the repo
+1. Attach pirate audio to raspberry pi (I used pirate audio with headphone out and a raspberry pi zero)
+
+2. Connect raspberry pi to internet and ssh onto it
+
+3. Set a new password
 ```sh
-git clone https://github.com/jb10181/spotify_zero.git
-```
-2. Install the required Python packages
-```sh
-pip install csv matplotlib ping3 time os datetime sys socket tkinter
+passwd
 ```
 
+4. Install all updates
+```sh
+sudo apt-get update
+sudo apt-get upgrade
+```
 
+5. Install the required apt packages
+```sh
+sudo apt-get install python3-rpi.gpio python3-spidev python3-pip python3-pil python3-numpy
+sudo apt install libopenjp2-7 libopenjp2-7-dev libopenjp2-tools libatlas-base-dev
+```
+
+6. Install the required Python packages
+```sh
+pip install st7789 numpy Pillow spotipy os time requests io
+```
+
+6. Set the following parameters at the bottom of the /boot/config.txt file
+```sh
+sudo vi /boot/config.txt
+```
+dtparam=audio=off
+
+dtoverlay=hifiberry-dac
+gpio=25=op,dh"
+
+6. Install raspotify
+```sh
+curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
+```
+
+6. Download this project and enter the project directory
+```sh
+git clone https://github.com/jb10181/spotify_zero
+cd spotify_zero
+```
+
+6. Set up the systemd service to run automatically
+```sh
+sudo cp spotify_pirate.service /lib/systemd/system/spotify_pirate.service
+sudo systemctl daemon-reload
+sudo systemctl enable spotify_pirate.service
+cd spotify_zero
+```
 
 <!-- USAGE EXAMPLES -->
 <!-- ## Usage
