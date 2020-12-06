@@ -16,7 +16,7 @@ sudo apt install libopenjp2-7 libopenjp2-7-dev libopenjp2-tools libatlas-base-de
 echo "Install required python packages"
 pip install st7789 numpy Pillow spotipy os time requests io
 
-echo " Set the following parameters
+echo "Set the following parameters
 # dtparam=audio=off
 #
 # dtoverlay=hifiberry-dac
