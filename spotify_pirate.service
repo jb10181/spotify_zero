@@ -1,0 +1,16 @@
+[Unit]
+Description=Starts Spotify service to display information on pirate audio display
+
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+User=pi
+Type=simple
+ExecStart=/home/pi/spotify_zero/spotify_pirate_launcher.sh &
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
