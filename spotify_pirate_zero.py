@@ -61,7 +61,7 @@ def get_spotify_data(token):
 
     # combines album art and decreases album art brightness
     img = song_art.resize((HEIGHT, WIDTH)).convert("RGBA")
-    darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 155))
+    darken = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 75))
     ImageDraw.Draw(darken)
     album_image = Image.alpha_composite(img, darken)
 
