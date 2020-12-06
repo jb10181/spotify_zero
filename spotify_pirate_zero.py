@@ -10,6 +10,7 @@ from io import BytesIO
 import ST7789
 
 
+# init text params
 def text_params(name, font):
     size_x, size_y = d.textsize(name, font)
     text_x = disp.width
@@ -17,6 +18,7 @@ def text_params(name, font):
     return size_x, size_y, text_x, text_y
 
 
+# spotify authentication
 def spotify_authorisation():
     if os.path.isfile(credentials_file):
         with open(credentials_file, "r") as f:
@@ -46,6 +48,7 @@ def spotify_authorisation():
     return token
 
 
+# gets the spotify data
 def get_spotify_data(token):
     sp = spotipy.Spotify(auth=token)
     currentsong = sp.currently_playing()
@@ -96,21 +99,24 @@ disp = ST7789.ST7789(
 
 # Initialize display.
 disp.begin()
-
 WIDTH = disp.width
 HEIGHT = disp.height
 
 t_start = time.time()
+# loops forever
 while True:
+    # if something playing
     try:
         name_artist, name_album, name_song, album_image = get_spotify_data(
             token)
+    # if nothing playing
     except TypeError:
         name_artist = ""
         name_album = ""
         name_song = "Nothing playing"
         album_image = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 255))
 
+    # sets how much text scrolls by each interval
     current_time = time.time()
     x_artist = (current_time - t_start
                 ) * speed_scaling * font_artist_size / 15
@@ -119,6 +125,7 @@ while True:
     x_song = (current_time -
               t_start) * speed_scaling * font_song_size / 15
 
+    # sets text parameters
     txt = Image.new("RGBA", (WIDTH, HEIGHT), (255, 255, 255, 0))
     d = ImageDraw.Draw(txt)
 
@@ -164,7 +171,9 @@ while True:
                font=font_song,
                fill=(255, 255, 255, 255))
 
+    # combines image with the text
     out = Image.alpha_composite(album_image, txt)
 
     disp.display(out)
+    # sleeps such that it runs every interval
     time.sleep(interval - ((time.time() - t_start) % interval))
