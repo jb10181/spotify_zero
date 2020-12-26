@@ -186,6 +186,12 @@ sudo systemctl enable spotify_pirate.service
 sudo reboot now
 ```
 
+11. Create your .credentials file
+```sh
+spotify_pirate_zero_create_credentials.py
+```
+If you are not using a GUI to control the raspberry pi, you should run this command on another computer that has a GUI and copy the .credentials file into the spotify_zero directory of the raspberry pi afterwards.
+
 <!-- USAGE EXAMPLES -->
 <!-- ## Usage
 
