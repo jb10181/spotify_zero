@@ -134,7 +134,7 @@ ST7789
 
 1. Attach pirate audio to raspberry pi (I used pirate audio with headphone out and a raspberry pi zero)
 
-2. Connect raspberry pi to internet and ssh onto it
+2. Connect raspberry pi to internet and ssh onto it (or control with GUI)
 
 3. Set a new password
 ```sh
