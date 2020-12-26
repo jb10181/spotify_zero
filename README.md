@@ -241,7 +241,10 @@ Project Link: [https://github.com/jb10181/spotify_zero](https://github.com/jb101
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
+* [Raspotify](https://dtcooper.github.io/raspotify/)
+* [Pirate Audio](https://github.com/pimoroni/pirate-audio)
 * [README template](https://github.com/othneildrew/Best-README-Template)
+
 <!-- * []()
 * []() -->
 
